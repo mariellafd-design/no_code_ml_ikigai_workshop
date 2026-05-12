@@ -21,8 +21,10 @@
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
+      position: relative;
+      overflow-x: hidden;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
+      background: #050b14;
       color: var(--text);
       min-height: 100dvh;
       display: flex;
@@ -30,6 +32,43 @@
       align-items: center;
       padding: 1.5rem 1rem 2rem;
       gap: 1.2rem;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    body::before {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(64, 192, 255, 0.22), transparent 24%),
+        radial-gradient(circle at 80% 25%, rgba(255, 72, 201, 0.16), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(82, 164, 255, 0.12), transparent 16%);
+      opacity: 0.85;
+    }
+
+    body::after {
+      background:
+        repeating-linear-gradient(130deg,
+          rgba(96, 190, 255, 0.18) 0 3px,
+          rgba(0, 0, 0, 0) 3px 40px),
+        linear-gradient(135deg, rgba(48, 112, 255, 0.10), rgba(243, 70, 255, 0.08) 45%, transparent 80%);
+      mix-blend-mode: screen;
+      animation: laser-move 12s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes laser-move {
+      0% {
+        background-position: 0 0, 0 0;
+      }
+      100% {
+        background-position: 480px 280px, -480px -260px;
+      }
     }
 
     header {
